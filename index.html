@@ -54,7 +54,7 @@ color:#e9c46a;
 font-size:12px;
 letter-spacing:4px;
 font-weight:bold;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .logo{
@@ -82,13 +82,30 @@ margin-bottom:12px;
 color:#c5c5c5;
 font-size:14px;
 line-height:1.7;
-margin-bottom:25px;
+margin-bottom:20px;
+}
+
+.timer-box{
+background:rgba(233, 193, 106, 0.1);
+border:1px solid #bd963d;
+border-radius:12px;
+padding:10px;
+margin-bottom:20px;
+font-size:14px;
+color:#f4d17b;
+font-weight:600;
+}
+
+#timer{
+font-size:18px;
+color:#20e99c;
+font-weight:bold;
 }
 
 .line{
 height:1px;
 background:linear-gradient(90deg,transparent,#d8aa45,transparent);
-margin:25px 0;
+margin:20px 0;
 }
 
 .free{
@@ -100,7 +117,7 @@ border-radius:30px;
 font-size:13px;
 font-weight:bold;
 letter-spacing:1px;
-margin-bottom:25px;
+margin-bottom:20px;
 background:#0c2419;
 }
 
@@ -158,8 +175,12 @@ color:#777;
 <h1>WICKET CALL FIX</h1>
 
 <div class="subtitle">
-Welcome to Wicket Call Fix Official Channel.
+Welcome to Wicket Call Fix Official Channel.<br>
 Join our Telegram community for cricket updates.
+</div>
+
+<div class="timer-box">
+Redirecting to Telegram in <span id="timer">15</span> seconds...
 </div>
 
 <div class="line"></div>
@@ -170,7 +191,7 @@ Join our Telegram community for cricket updates.
 
 <a class="join"
 href="https://t.me/+CgKn6SqtGHA0MjI9"
-onclick="fbq('trackCustom','TelegramJoinClick');">
+onclick="trackLeadEvent();">
 ✈ JOIN FREE TELEGRAM
 </a>
 
@@ -188,6 +209,32 @@ ALL RIGHTS RESERVED
 </div>
 
 </div>
+
+<script>
+    const telegramLink = "https://t.me/+CgKn6SqtGHA0MjI9";
+
+    function trackLeadEvent() {
+        fbq('track', 'Lead', {
+            currency: 'INR',
+            value: 0.00
+        });
+    }
+
+    // 15 Second Timer Logic & Auto Redirect with Lead Event
+    let secondsLeft = 15;
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        secondsLeft--;
+        timerElement.textContent = secondsLeft;
+
+        if (secondsLeft <= 0) {
+            clearInterval(countdown);
+            trackLeadEvent();
+            window.location.href = telegramLink;
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>
